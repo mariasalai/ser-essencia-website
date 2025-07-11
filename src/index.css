@@ -8,35 +8,56 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Ser Essência Natural Theme */
+    --background: 45 20% 98%;
+    --foreground: 90 25% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 45 25% 97%;
+    --card-foreground: 90 25% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 45 25% 97%;
+    --popover-foreground: 90 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Nature Green */
+    --primary: 95 45% 35%;
+    --primary-foreground: 45 20% 98%;
+    --primary-light: 95 35% 50%;
+    --primary-dark: 95 55% 25%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Earth Tones */
+    --secondary: 35 25% 85%;
+    --secondary-foreground: 90 25% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted - Soft Natural */
+    --muted: 45 15% 92%;
+    --muted-foreground: 90 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Warm Earth */
+    --accent: 25 35% 75%;
+    --accent-foreground: 90 25% 15%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 45 20% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 45 15% 87%;
+    --input: 45 15% 90%;
+    --ring: 95 45% 35%;
 
-    --radius: 0.5rem;
+    /* Custom Design Tokens */
+    --nature-green: 95 45% 35%;
+    --nature-light: 95 35% 50%;
+    --earth-warm: 25 35% 75%;
+    --cream-soft: 45 25% 95%;
+    
+    /* Gradients */
+    --gradient-nature: linear-gradient(135deg, hsl(var(--nature-green)), hsl(var(--nature-light)));
+    --gradient-soft: linear-gradient(180deg, hsl(var(--cream-soft)), hsl(var(--background)));
+    
+    /* Shadows */
+    --shadow-natural: 0 4px 20px hsla(var(--nature-green), 0.15);
+    --shadow-soft: 0 2px 10px hsla(var(--foreground), 0.1);
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 

@@ -25,74 +25,87 @@ export interface Product {
 export type ProductCategory = 'escalda-pes' | 'spray-terapeutico' | 'roll-on' | 'lembrancinhas';
 
 export const categoryNames: Record<ProductCategory, string> = {
-  'escalda-pes': 'Escalda Pés',
+  'escalda-pes': 'Escalda-Pés',
   'spray-terapeutico': 'Spray Terapêutico', 
   'roll-on': 'Roll-on Terapêutico',
   'lembrancinhas': 'Lembrancinhas'
 };
 
 export const categoryDescriptions: Record<ProductCategory, string> = {
-  'escalda-pes': 'Relaxamento profundo para seus pés com ervas naturais',
-  'spray-terapeutico': 'Óleos essenciais para seu bem-estar diário',
+  'escalda-pes': 'O poder de realizar um ritual milenar na sua rotina',
+  'spray-terapeutico': 'Óleos essenciais em forma de spray para seu bem-estar diário',
   'roll-on': 'Alívio natural e prático para levar onde quiser',
   'lembrancinhas': 'Presentes especiais com o carinho da natureza'
 };
 
 // Base de dados dos produtos - EDITE AQUI PARA GERENCIAR TODOS OS PRODUTOS
 export const products: Product[] = [
-  // Escalda Pés
+  // Escalda-Pés
   {
-    id: 'ep001',
-    name: 'Escalda Pés Relaxante Lavanda',
-    description: 'Mistura especial de ervas naturais com lavanda para um relaxamento profundo dos pés',
-    price: 25.90,
+    id: 'eprelaxar50',
+    name: 'Escalda-Pés Relaxar 50g',
+    description: 'Uma pausa merecida para os seus pés e sua mente. Nosso Escalda-Pés Relaxar é feito com sal rosa do Himalaia, lavanda, camomila e hibiscos — ingredientes naturais que aliviam o cansaço físico e mental. Ao entrar em contato com a água morna, liberam um aroma suave e terapêutico que acalma, relaxa e ajuda a desacelerar depois de um dia corrido. Ideal para momentos de autocuidado e conexão com o presente. Uso único.',
+    price: 9.90,
     image: escaldaPesLavanda,
     category: 'escalda-pes',
     featured: true, // PRODUTO EM DESTAQUE
-    ingredients: ['Lavanda', 'Camomila', 'Hortelã', 'Sal marinho'],
+    ingredients: ['Óleo Essencial de Lavanda', 'Camomila', 'Hibiscos', 'Sal grosso rosa'],
     benefits: ['Relaxamento', 'Alívio do estresse', 'Melhora a circulação'],
-    howToUse: 'Dissolva 2 colheres em água morna e deixe os pés de molho por 15-20 minutos',
+    howToUse: 'Dissolva o conteúdo completo em água morna, deixe os pés de molho por 15-20 minutos',
     inStock: true
   },
   {
-    id: 'ep002', 
-    name: 'Escalda Pés Energizante Eucalipto',
-    description: 'Fórmula revigorante com eucalipto para revitalizar e energizar',
-    price: 28.90,
-    image: '/api/placeholder/300/300',
+    id: 'eprelaxar200', 
+    name: 'Escalda-Pés Relaxar 200g',
+    description: 'Uma pausa merecida para os seus pés e sua mente. Nosso Escalda-Pés Relaxar é feito com sal rosa do Himalaia, lavanda, camomila e hibiscos — ingredientes naturais que aliviam o cansaço físico e mental. Ao entrar em contato com a água morna, liberam um aroma suave e terapêutico que acalma, relaxa e ajuda a desacelerar depois de um dia corrido. Ideal para momentos de autocuidado e conexão com o presente. Rende até 5 usos.',
+    price: 26.90,
+    image: escaldaPesLavanda,
     category: 'escalda-pes',
     featured: false,
-    ingredients: ['Eucalipto', 'Alecrim', 'Mentol natural'],
-    benefits: ['Energização', 'Alívio de tensões', 'Sensação refrescante'],
-    howToUse: 'Dissolva 2 colheres em água morna pela manhã para energizar o dia',
+    ingredients: ['Óleo Essencial de Lavanda', 'Camomila', 'Hibiscos', 'Sal grosso rosa'],
+    benefits: ['Relaxamento', 'Alívio do estresse', 'Melhora a circulação'],
+    howToUse: 'Dissolva 50g do conteúdo em água morna, deixe os pés de molho por 15-20 minutos',
     inStock: true
   },
 
   // Spray Terapêutico
   {
-    id: 'st001',
-    name: 'Spray Calmante Melissa',
-    description: 'Spray natural com melissa para momentos de tranquilidade e bem-estar',
-    price: 35.90,
+    id: 'stacal60',
+    name: 'Spray Terapêutico Acalmar 60ml',
+    description: 'Um convite para desacelerar e cuidar de si. O Spray Terapêutico Acalmar foi desenvolvido com óleos essenciais puros e naturais que auxiliam na redução da ansiedade, promovendo serenidade e bem-estar. Ideal para incorporar à rotina noturna: borrife no travesseiro, lençóis ou no ambiente antes de dormir e permita-se relaxar profundamente. Também pode ser usado ao longo do dia, sempre que sentir o emocional sobrecarregado ou precisar se recentrar. Um gesto simples que acalma corpo, mente e coração.',
+    price: 38.00,
     image: sprayMelissa,
     category: 'spray-terapeutico',
     featured: true, // PRODUTO EM DESTAQUE
-    ingredients: ['Óleo essencial de Melissa', 'Água destilada', 'Álcool de cereais'],
-    benefits: ['Reduz ansiedade', 'Promove calma', 'Aromaterapia natural'],
+    ingredients: ['Óleo essencial de Lavanda', 'Óleo essencial de Copaíba', 'Óleo essencial de Olíbano'],
+    benefits: ['Reduz ansiedade', 'Promove calma','Melhora a qualidade do sono', 'Aromaterapia natural'],
     howToUse: 'Borrife no ambiente ou nas roupas sempre que precisar de tranquilidade',
     inStock: true
   },
   {
-    id: 'st002',
-    name: 'Spray Purificador Tea Tree',
-    description: 'Spray antibacteriano natural com tea tree para purificar ambientes',
-    price: 32.90,
-    image: '/api/placeholder/300/300',
+    id: 'stcon60',
+    name: 'Spray Terapêutico Conectar 60ml',
+    description: 'Um respiro profundo para voltar ao seu centro. O Spray Terapêutico Conectar foi criado para momentos em que você deseja se reconectar consigo mesma, cultivar presença e nutrir seu universo interior. Com uma sinergia especial de óleos essenciais que atuam no campo emocional e sutil, ele favorece a introspecção, a espiritualidade e o autoconhecimento. Ao mesmo tempo, desperta a leveza, o bom humor e a criatividade — sentimentos que florescem quando estamos verdadeiramente conectadas com quem somos. Use em práticas como meditação, yoga ou sempre que precisar de acolhimento, inspiração e equilíbrio emocional.',
+    price: 38.00,
+    image: sprayMelissa,
     category: 'spray-terapeutico',
     featured: false,
-    ingredients: ['Tea Tree', 'Alecrim', 'Álcool 70%'],
-    benefits: ['Purifica o ar', 'Propriedades antibacterianas', 'Aroma revigorante'],
-    howToUse: 'Borrife no ambiente para purificar e aromatizar',
+    ingredients: ['Óleo essencial de Bergamota', 'Óleo essencial de Laranja-Selvagem', 'Óleo essencial de Limão-Siciliano'],
+    benefits: ['Promove presença e reconexão interior', 'Estimula o bom humor e a leveza emocional', 'Desperta a criatividade'],
+    howToUse: 'Borrife no ambiente e inale profundamente o aroma',
+    inStock: true
+  },
+  {
+    id: 'stdes60',
+    name: 'Spray Terapêutico Despertar 60ml',
+    description: 'Para começar o dia com clareza, energia e vitalidade. O Spray Terapêutico Despertar é uma sinergia vibrante de hortelã-pimenta, menta verde e cipreste — óleos essenciais reconhecidos por estimularem a mente, melhorarem a respiração e ativarem a circulação. Ideal para usar ao acordar, durante o trabalho ou antes de se exercitar, ele refresca, anima e desperta corpo e mente para um novo ciclo. Uma borrifada e você já sente a diferença.',
+    price: 38.00,
+    image: sprayMelissa,
+    category: 'spray-terapeutico',
+    featured: false,
+    ingredients: ['Óleo essencial de Hortelã-Pimenta', 'Óleo essencial de Menta Verde', 'Óleo essencial de Cipreste'],
+    benefits: ['Estimula o foco e a clareza mental', 'Melhora a respiração', 'Ativa o corpo', 'Ajuda a sair da estagnação e do cansaço mental'],
+    howToUse: 'Borrife no ambiente e inale profundamente o aroma',
     inStock: true
   },
 
@@ -151,21 +164,6 @@ export const products: Product[] = [
     howToUse: 'Coloque em gavetas, armários ou ambientes pequenos',
     inStock: true
   },
-
-  // Produto adicional para completar o carrossel
-  {
-    id: 'st003',
-    name: 'Spray Proteção Energética',
-    description: 'Blend especial para limpeza energética e proteção do ambiente',
-    price: 38.90,
-    image: sprayProtecao,
-    category: 'spray-terapeutico',
-    featured: true, // PRODUTO EM DESTAQUE - 5º produto
-    ingredients: ['Arruda', 'Guiné', 'Alecrim', 'Água energizada'],
-    benefits: ['Proteção energética', 'Limpeza de ambientes', 'Paz interior'],
-    howToUse: 'Borrife no ambiente e em sua aura para proteção energética',
-    inStock: true
-  }
 ];
 
 // Funções utilitárias para facilitar o uso

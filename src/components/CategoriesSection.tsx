@@ -59,7 +59,7 @@ const CategoriesSection = () => {
                     className="w-full border-nature/20 text-nature hover:bg-nature hover:text-primary-foreground transition-all duration-300 group/btn"
                   >
                     <Link to={`/catalogo?categoria=${category}`} className="flex items-center justify-center space-x-2">
-                      <span>Ver Produtos</span>
+                      <span>Ver produtos</span>
                       <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </Button>

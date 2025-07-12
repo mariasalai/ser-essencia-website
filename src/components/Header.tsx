@@ -47,7 +47,7 @@ const Header = () => {
         >
           <Link to="/catalogo" className="flex items-center space-x-2">
             <ShoppingBag className="h-4 w-4" />
-            <span className="hidden sm:inline">Ver Catálogo Completo</span>
+            <span className="hidden sm:inline">Todos os produtos</span>
             <span className="sm:hidden">Catálogo</span>
           </Link>
         </Button>

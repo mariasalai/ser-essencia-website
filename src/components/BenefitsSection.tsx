@@ -7,17 +7,17 @@ const BenefitsSection = () => {
   const benefits = [
     {
       icon: Leaf,
-      title: "Ingredientes Naturais",
+      title: "Ingredientes naturais",
       description: "Selecionamos apenas os melhores ingredientes da natureza"
     },
     {
       icon: Heart,
-      title: "Feito com Carinho",
+      title: "Feito com carinho",
       description: "Cada produto é preparado com amor e dedicação"
     },
     {
       icon: CheckCircle,
-      title: "Resultados Eficazes",
+      title: "Resultados eficazes",
       description: "Comprovados benefícios para seu bem-estar"
     }
   ];
@@ -28,7 +28,7 @@ const BenefitsSection = () => {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Por Que Escolher a Ser Essência?
+            Por que escolher a Ser Essência?
           </h2>
         </div>
 
@@ -65,10 +65,10 @@ const BenefitsSection = () => {
         {/* CTA Section */}
         <div className="text-center bg-card rounded-2xl p-8 shadow-soft border border-border">
           <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-            Pronto para Transformar Sua Rotina?
+            Pronta(o) para transformar sua rotina?
           </h3>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Descubra como nossos produtos naturais podem fazer a diferença em sua vida
+            Descubra como nossos produtos naturais podem fazer a diferença em sua vida, melhorando a qualidade do seu sono, sua produtividade e até seus relacionamentos
           </p>
           <Button 
             asChild
@@ -76,7 +76,7 @@ const BenefitsSection = () => {
             className="bg-gradient-nature hover:bg-primary-dark transition-all duration-300 shadow-natural group"
           >
             <Link to="/catalogo" className="flex items-center space-x-2">
-              <span>Explorar Produtos</span>
+              <span>Explorar produtos</span>
               <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </Button>

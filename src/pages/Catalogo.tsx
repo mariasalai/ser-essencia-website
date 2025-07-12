@@ -61,10 +61,10 @@ const Catalogo = () => {
         {/* Page Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Catálogo de Produtos
+            Catálogo de produtos
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Descubra nossa linha completa de produtos naturais para seu bem-estar
+            Descubra todos os nossos produtos, feitos especialmente para trazer mais conexão a sua vida
           </p>
         </div>
 
@@ -85,7 +85,7 @@ const Catalogo = () => {
                   : 'border-nature/20 text-nature hover:bg-nature hover:text-primary-foreground'
               } transition-all duration-300`}
             >
-              Todos os Produtos
+              Todos os produtos
             </Button>
             
             {categories.map((category) => (
@@ -186,7 +186,7 @@ const Catalogo = () => {
               variant="outline"
               className="border-nature text-nature hover:bg-nature hover:text-primary-foreground"
             >
-              Ver Todos os Produtos
+              Ver todos os produtos
             </Button>
           </div>
         )}

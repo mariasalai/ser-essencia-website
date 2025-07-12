@@ -15,9 +15,9 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
           {/* Main heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
-            Desperte Sua{" "}
+            Conecte-se com a sua verdadeira{" "}
             <span className="text-transparent bg-gradient-nature bg-clip-text">
-              Essência Natural
+              Essência
             </span>
           </h1>
 
@@ -36,11 +36,11 @@ const HeroSection = () => {
             </div>
             <div className="flex items-center space-x-2 text-nature">
               <Heart className="h-5 w-5" />
-              <span className="font-medium">Feito com Amor</span>
+              <span className="font-medium">Feito com amor</span>
             </div>
             <div className="flex items-center space-x-2 text-nature">
               <Shield className="h-5 w-5" />
-              <span className="font-medium">Bem-Estar Garantido</span>
+              <span className="font-medium">Bem-estar garantido</span>
             </div>
           </div>
 
@@ -51,7 +51,7 @@ const HeroSection = () => {
             className="bg-gradient-nature hover:bg-primary-dark transition-all duration-300 shadow-natural text-lg px-8 py-6 group"
           >
             <Link to="/catalogo" className="flex items-center space-x-2">
-              <span>Explore Nossos Produtos</span>
+              <span>Conheça nossos produtos</span>
               <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </Button>

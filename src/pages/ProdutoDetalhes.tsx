@@ -22,7 +22,7 @@ const ProdutoDetalhes = () => {
           <div className="text-center">
             <h1 className="text-2xl font-bold text-foreground mb-4">Produto não encontrado</h1>
             <Button asChild variant="outline">
-              <Link to="/catalogo">Voltar ao Catálogo</Link>
+              <Link to="/catalogo">Voltar ao catálogo</Link>
             </Button>
           </div>
         </main>
@@ -89,7 +89,7 @@ const ProdutoDetalhes = () => {
         >
           <Link to="/catalogo" className="flex items-center space-x-2">
             <ArrowLeft className="h-4 w-4" />
-            <span>Voltar ao Catálogo</span>
+            <span>Voltar ao catálogo</span>
           </Link>
         </Button>
 
@@ -115,7 +115,7 @@ const ProdutoDetalhes = () => {
               </Badge>
               {product.featured && (
                 <Badge variant="outline" className="border-nature text-nature">
-                  Produto em Destaque
+                  Produto em destaque
                 </Badge>
               )}
               <Badge variant="outline" className="border-green-500 text-green-600">
@@ -147,17 +147,10 @@ const ProdutoDetalhes = () => {
                 className="flex-1 bg-gradient-nature hover:bg-primary-dark transition-all duration-300 shadow-natural"
               >
                 <ShoppingCart className="h-5 w-5 mr-2" />
-                Adicionar ao Carrinho
+                Adicionar ao carrinho
               </Button>
               
               <div className="flex gap-2">
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="border-nature/20 text-nature hover:bg-nature hover:text-primary-foreground"
-                >
-                  <Heart className="h-5 w-5" />
-                </Button>
                 <Button 
                   variant="outline" 
                   size="lg"
@@ -211,7 +204,7 @@ const ProdutoDetalhes = () => {
           {product.howToUse && (
             <Card className="border-2 border-border md:col-span-2 lg:col-span-1">
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-foreground mb-4">Como Usar</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-4">Como usar</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   {product.howToUse}
                 </p>
@@ -235,7 +228,7 @@ const ProdutoDetalhes = () => {
             className="border-2 border-nature text-nature hover:bg-nature hover:text-primary-foreground transition-all duration-300"
           >
             <Link to={`/catalogo?categoria=${product.category}`}>
-              Ver Produtos Similares
+              Ver similares
             </Link>
           </Button>
         </div>

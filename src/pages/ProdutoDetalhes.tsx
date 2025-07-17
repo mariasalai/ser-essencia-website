@@ -144,24 +144,26 @@ const ProdutoDetalhes = () => {
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="space-y-4">
               <Button 
                 onClick={handleAddToCart}
                 size="lg"
-                className="flex-1 bg-gradient-nature hover:bg-primary-dark transition-all duration-300 shadow-natural"
+                className="w-full bg-gradient-nature hover:bg-primary-dark transition-all duration-300 shadow-natural"
               >
                 <ShoppingCart className="h-5 w-5 mr-2" />
                 Adicionar ao carrinho
               </Button>
               
-              <div className="flex gap-2">
+              <div className="flex gap-3 justify-center">
                 <Button 
                   variant="outline" 
                   size="lg"
                   onClick={handleShare}
-                  className="border-nature/20 text-nature hover:bg-nature hover:text-primary-foreground"
+                  className="border-nature/20 text-nature hover:bg-nature hover:text-primary-foreground px-6"
                 >
-                  <Share2 className="h-5 w-5" />
+                  <Share2 className="h-5 w-5 mr-2" />
+                  <span className="hidden sm:inline">Compartilhar</span>
+                  <span className="sm:hidden">Compartilhar</span>
                 </Button>
               </div>
             </div>

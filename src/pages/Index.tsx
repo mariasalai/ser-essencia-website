@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import ProductCarousel from "@/components/ProductCarousel";
 import CategoriesSection from "@/components/CategoriesSection";
 import BenefitsSection from "@/components/BenefitsSection";
+import { Cart } from "@/components/Cart";
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
       <ProductCarousel />
       <CategoriesSection />
       <BenefitsSection />
+      <Cart />
     </div>
   );
 };

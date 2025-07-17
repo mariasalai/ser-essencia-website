@@ -5,12 +5,15 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { getProductById, categoryNames } from "@/data/products";
 import Header from "@/components/Header";
+import { Cart } from "@/components/Cart";
+import { useCart } from "@/contexts/CartContext";
 import { ArrowLeft, ShoppingCart, Heart, Share2, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const ProdutoDetalhes = () => {
   const { id } = useParams<{ id: string }>();
   const { toast } = useToast();
+  const { addToCart } = useCart();
   
   const product = id ? getProductById(id) : undefined;
 
@@ -38,6 +41,7 @@ const ProdutoDetalhes = () => {
   };
 
   const handleAddToCart = () => {
+    addToCart(product);
     toast({
       title: "Produto adicionado!",
       description: `${product.name} foi adicionado ao seu carrinho.`,
@@ -233,6 +237,7 @@ const ProdutoDetalhes = () => {
           </Button>
         </div>
       </main>
+      <Cart />
     </div>
   );
 };

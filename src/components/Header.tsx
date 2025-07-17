@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Leaf, ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
+import { CartTrigger } from "@/components/Cart";
 
 const Header = () => {
   return (
@@ -40,17 +41,20 @@ const Header = () => {
           </Link>
         </nav>
 
-        {/* CTA */}
-        <Button 
-          asChild
-          className="bg-gradient-nature hover:bg-primary-dark transition-all duration-300 shadow-natural"
-        >
-          <Link to="/catalogo" className="flex items-center space-x-2">
-            <ShoppingBag className="h-4 w-4" />
-            <span className="hidden sm:inline">Todos os produtos</span>
-            <span className="sm:hidden">Catálogo</span>
-          </Link>
-        </Button>
+        {/* Actions */}
+        <div className="flex items-center space-x-3">
+          <CartTrigger />
+          <Button 
+            asChild
+            className="bg-gradient-nature hover:bg-primary-dark transition-all duration-300 shadow-natural"
+          >
+            <Link to="/catalogo" className="flex items-center space-x-2">
+              <ShoppingBag className="h-4 w-4" />
+              <span className="hidden sm:inline">Todos os produtos</span>
+              <span className="sm:hidden">Catálogo</span>
+            </Link>
+          </Button>
+        </div>
       </div>
     </header>
   );

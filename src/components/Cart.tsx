@@ -44,7 +44,7 @@ export const Cart: React.FC = () => {
     message += `💰 *Total: R$ ${getTotalPrice().toFixed(2)}*\n\n`;
     message += "Gostaria de finalizar este pedido! 😊";
 
-    const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/5547999382587?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
@@ -61,7 +61,7 @@ export const Cart: React.FC = () => {
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
             <ShoppingCart className="h-5 w-5" />
-            Carrinho de Compras
+            Carrinho de compras
           </SheetTitle>
         </SheetHeader>
 
@@ -120,11 +120,13 @@ export const Cart: React.FC = () => {
                 ))}
               </div>
 
-              <div className="border-t pt-4 space-y-4">
+              <div className="border-t pt-4 space-y-2">
                 <div className="flex justify-between items-center font-semibold text-lg">
                   <span>Total:</span>
                   <span>{formatPrice(getTotalPrice())}</span>
                 </div>
+                  {/* Novo texto: Frete a combinar */}
+                <div className="text-sm text-gray-600 text-right -mt-2">Frete a combinar</div>
 
                 <div className="space-y-2">
                   <Button
@@ -140,7 +142,7 @@ export const Cart: React.FC = () => {
                     onClick={clearCart}
                     className="w-full"
                   >
-                    Limpar Carrinho
+                    Limpar carrinho
                   </Button>
                 </div>
               </div>

@@ -142,9 +142,11 @@ const Catalogo = () => {
                   </div>
                 )}
                 <div className="absolute top-3 right-3">
-                  <Badge variant="outline" className="bg-background/80 backdrop-blur-sm">
-                    {categoryNames[product.category]}
-                  </Badge>
+                  {product.category?.[0] && categoryNames[product.category[0]] && (
+                    <Badge variant="outline" className="bg-background/80 backdrop-blur-sm">
+                      {categoryNames[product.category[0]]}
+                    </Badge>
+                  )}
                 </div>
               </div>
               

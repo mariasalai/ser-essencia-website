@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { getProductById, categoryNames } from "@/data/products";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { Cart } from "@/components/Cart";
 import { useCart } from "@/contexts/CartContext";
 import { ArrowLeft, ShoppingCart, Heart, Share2, Check } from "lucide-react";
@@ -79,7 +80,7 @@ const ProdutoDetalhes = () => {
             to={`/catalogo?categoria=${product.category}`} 
             className="hover:text-nature transition-colors"
           >
-            {categoryNames[product.category]}
+            {product.category?.[0] && categoryNames[product.category[0]]}
           </Link>
           <span>/</span>
           <span className="text-foreground">{product.name}</span>
@@ -115,7 +116,7 @@ const ProdutoDetalhes = () => {
             {/* Badges */}
             <div className="flex flex-wrap gap-2">
               <Badge className="bg-gradient-nature text-primary-foreground">
-                {categoryNames[product.category]}
+                {product.category?.[0] && categoryNames[product.category[0]]}
               </Badge>
               {product.featured && (
                 <Badge variant="outline" className="border-nature text-nature">
@@ -225,7 +226,7 @@ const ProdutoDetalhes = () => {
             Gostou deste produto?
           </h3>
           <p className="text-muted-foreground mb-6">
-            Explore outros produtos da categoria {categoryNames[product.category]}
+            Explore outros produtos da categoria {product.category?.[0] && categoryNames[product.category[0]]}
           </p>
           <Button 
             asChild
@@ -239,6 +240,7 @@ const ProdutoDetalhes = () => {
           </Button>
         </div>
       </main>
+      <Footer />
       <Cart />
     </div>
   );

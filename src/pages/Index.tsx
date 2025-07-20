@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import ProductCarousel from "@/components/ProductCarousel";
 import CategoriesSection from "@/components/CategoriesSection";
@@ -13,6 +14,7 @@ const Index = () => {
       <ProductCarousel />
       <CategoriesSection />
       <BenefitsSection />
+      <Footer />
       <Cart />
     </div>
   );

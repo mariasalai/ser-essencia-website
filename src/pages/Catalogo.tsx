@@ -12,6 +12,7 @@ import {
   type Product 
 } from "@/data/products";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { Cart } from "@/components/Cart";
 import { ArrowRight, Filter, X } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -204,6 +205,7 @@ const Catalogo = () => {
           </div>
         )}
       </main>
+      <Footer />
       <Cart />
     </div>
   );

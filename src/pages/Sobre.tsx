@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
+import Footer from "@/components/Footer";
 import { Cart } from "@/components/Cart";
 
 const Sobre = () => {
@@ -60,6 +60,8 @@ const Sobre = () => {
                 </p>
                 </div>
             </section>
+            <Footer />
+            <Cart />
         </div>
     );
 };

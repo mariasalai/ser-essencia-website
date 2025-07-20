@@ -8,7 +8,7 @@ const categoryIcons: Record<ProductCategory, any> = {
   'escalda-pes': Droplets,
   'spray-terapeutico': Sparkles,
   'roll-on': Circle,
-  'lembrancinhas': Gift
+  'kits' : Gift,
 };
 
 const CategoriesSection = () => {

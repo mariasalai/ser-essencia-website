@@ -174,8 +174,7 @@ const Contato = () => {
               </p>
               <Button 
                 asChild
-                variant="outline"
-                className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 transition-all duration-300 shadow-lg"
               >
                 <a 
                   href="https://wa.me/5547999382587" 

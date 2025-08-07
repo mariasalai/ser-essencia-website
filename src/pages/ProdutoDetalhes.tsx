@@ -114,19 +114,30 @@ const ProdutoDetalhes = () => {
           {/* Product Info */}
           <div className="space-y-6">
             {/* Badges */}
-            <div className="flex flex-wrap gap-2">
-              <Badge className="bg-gradient-nature text-primary-foreground">
-                {product.category?.[0] && categoryNames[product.category[0]]}
-              </Badge>
-              {product.featured && (
-                <Badge variant="outline" className="border-nature text-nature">
-                  Produto em destaque
+            <div className="flex flex-wrap gap-2 items-center justify-between">
+              <div className="flex flex-wrap gap-2">
+                <Badge className="bg-gradient-nature text-primary-foreground">
+                  {product.category?.[0] && categoryNames[product.category[0]]}
                 </Badge>
-              )}
-              <Badge variant="outline" className="border-green-500 text-green-600">
-                <Check className="h-3 w-3 mr-1" />
-                Em Estoque
-              </Badge>
+                {product.featured && (
+                  <Badge variant="outline" className="border-nature text-nature">
+                    Produto em destaque
+                  </Badge>
+                )}
+                <Badge variant="outline" className="border-green-500 text-green-600">
+                  <Check className="h-3 w-3 mr-1" />
+                  Em Estoque
+                </Badge>
+              </div>
+              
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={handleShare}
+                className="text-muted-foreground hover:text-nature p-1 h-auto"
+              >
+                <Share2 className="h-4 w-4" />
+              </Button>
             </div>
 
             {/* Product Name */}
@@ -154,19 +165,6 @@ const ProdutoDetalhes = () => {
                 <ShoppingCart className="h-5 w-5 mr-2" />
                 Adicionar ao carrinho
               </Button>
-              
-              <div className="flex gap-3 justify-center">
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  onClick={handleShare}
-                  className="border-nature/20 text-nature hover:bg-nature hover:text-primary-foreground px-6"
-                >
-                  <Share2 className="h-5 w-5 mr-2" />
-                  <span className="hidden sm:inline">Compartilhar</span>
-                  <span className="sm:hidden">Compartilhar</span>
-                </Button>
-              </div>
             </div>
           </div>
         </div>

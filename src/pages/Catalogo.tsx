@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 
 const Catalogo = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedCategory, setSelectedCategory] = useState<ProductCategory | 'all'>('all');
+  const [selectedCategories, setSelectedCategories] = useState<Set<ProductCategory>>(new Set());
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
 
   const categories = getAllCategories();
@@ -27,25 +27,42 @@ const Catalogo = () => {
   useEffect(() => {
     const categoria = searchParams.get('categoria') as ProductCategory;
     if (categoria && categories.includes(categoria)) {
-      setSelectedCategory(categoria);
+      setSelectedCategories(new Set([categoria]));
     }
   }, [searchParams]);
 
   useEffect(() => {
-    if (selectedCategory === 'all') {
+    if (selectedCategories.size === 0) {
       setFilteredProducts(products.filter(p => p.inStock));
     } else {
-      setFilteredProducts(getProductsByCategory(selectedCategory));
+      const filtered = products.filter(product => 
+        product.inStock && 
+        product.category && 
+        product.category.some(cat => selectedCategories.has(cat))
+      );
+      setFilteredProducts(filtered);
     }
-  }, [selectedCategory]);
+  }, [selectedCategories]);
 
-  const handleCategoryFilter = (category: ProductCategory | 'all') => {
-    setSelectedCategory(category);
-    if (category === 'all') {
+  const handleCategoryFilter = (category: ProductCategory) => {
+    const newCategories = new Set(selectedCategories);
+    if (newCategories.has(category)) {
+      newCategories.delete(category);
+    } else {
+      newCategories.add(category);
+    }
+    setSelectedCategories(newCategories);
+    
+    if (newCategories.size === 0) {
       setSearchParams({});
     } else {
-      setSearchParams({ categoria: category });
+      setSearchParams({ categoria: Array.from(newCategories).join(',') });
     }
+  };
+
+  const handleClearFilters = () => {
+    setSelectedCategories(new Set());
+    setSearchParams({});
   };
 
   const formatPrice = (price: number) => {
@@ -79,10 +96,10 @@ const Catalogo = () => {
           
           <div className="flex flex-wrap gap-2">
             <Button
-              variant={selectedCategory === 'all' ? 'default' : 'outline'}
-              onClick={() => handleCategoryFilter('all')}
+              variant={selectedCategories.size === 0 ? 'default' : 'outline'}
+              onClick={handleClearFilters}
               className={`${
-                selectedCategory === 'all' 
+                selectedCategories.size === 0 
                   ? 'bg-gradient-nature hover:bg-primary-dark' 
                   : 'border-nature/20 text-nature hover:bg-nature hover:text-primary-foreground'
               } transition-all duration-300`}
@@ -93,10 +110,10 @@ const Catalogo = () => {
             {categories.map((category) => (
               <Button
                 key={category}
-                variant={selectedCategory === category ? 'default' : 'outline'}
+                variant={selectedCategories.has(category) ? 'default' : 'outline'}
                 onClick={() => handleCategoryFilter(category)}
                 className={`${
-                  selectedCategory === category 
+                  selectedCategories.has(category) 
                     ? 'bg-gradient-nature hover:bg-primary-dark' 
                     : 'border-nature/20 text-nature hover:bg-nature hover:text-primary-foreground'
                 } transition-all duration-300`}
@@ -106,18 +123,28 @@ const Catalogo = () => {
             ))}
           </div>
 
-          {selectedCategory !== 'all' && (
-            <div className="mt-4 flex items-center gap-2">
+          {selectedCategories.size > 0 && (
+            <div className="mt-4 flex items-center gap-2 flex-wrap">
               <span className="text-sm text-muted-foreground">Filtrando por:</span>
-              <Badge variant="outline" className="border-nature text-nature">
-                {categoryNames[selectedCategory]}
-                <button
-                  onClick={() => handleCategoryFilter('all')}
-                  className="ml-2 hover:text-destructive transition-colors"
-                >
-                  <X className="h-3 w-3" />
-                </button>
-              </Badge>
+              {Array.from(selectedCategories).map((category) => (
+                <Badge key={category} variant="outline" className="border-nature text-nature">
+                  {categoryNames[category]}
+                  <button
+                    onClick={() => handleCategoryFilter(category)}
+                    className="ml-2 hover:text-destructive transition-colors"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </Badge>
+              ))}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleClearFilters}
+                className="text-muted-foreground hover:text-destructive"
+              >
+                Limpar filtros
+              </Button>
             </div>
           )}
         </div>
@@ -127,14 +154,15 @@ const Catalogo = () => {
           {filteredProducts.map((product) => (
             <Card 
               key={product.id}
-              className="overflow-hidden border-2 border-border hover:border-nature/30 transition-all duration-300 hover:shadow-natural group"
+              className="overflow-hidden border-2 border-border hover:border-nature/30 transition-all duration-300 hover:shadow-natural group cursor-pointer"
             >
-              <div className="aspect-square relative overflow-hidden bg-cream/30">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+              <Link to={`/produto/${product.id}`} className="block">
+                <div className="aspect-square relative overflow-hidden bg-cream/30">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 {product.featured && (
                   <div className="absolute top-3 left-3">
                     <Badge className="bg-gradient-nature text-primary-foreground">
@@ -149,15 +177,18 @@ const Catalogo = () => {
                     </Badge>
                   )}
                 </div>
-              </div>
+                </div>
+              </Link>
               
               <CardContent className="p-4">
-                <h3 className="font-semibold text-foreground mb-2 line-clamp-1 group-hover:text-nature transition-colors">
-                  {product.name}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                  {product.description}
-                </p>
+                <Link to={`/produto/${product.id}`}>
+                  <h3 className="font-semibold text-foreground mb-2 line-clamp-1 group-hover:text-nature transition-colors">
+                    {product.name}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                    {product.description}
+                  </p>
+                </Link>
                 
                 <div className="flex items-center justify-between">
                   <span className="text-xl font-bold text-nature">
@@ -186,7 +217,7 @@ const Catalogo = () => {
               Nenhum produto encontrado nesta categoria.
             </p>
             <Button 
-              onClick={() => handleCategoryFilter('all')}
+              onClick={handleClearFilters}
               variant="outline"
               className="border-nature text-nature hover:bg-nature hover:text-primary-foreground"
             >

@@ -48,25 +48,29 @@ const ProductHighlights = ({ productIds }: ProductHighlightsProps) => {
               key={product.id}
               className="overflow-hidden border-2 border-nature/10 hover:border-nature/30 transition-all duration-300 hover:shadow-natural group"
             >
-              <div className="aspect-square relative overflow-hidden bg-cream/50">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+              <Link to={`/produto/${product.id}`} className="block">
+                <div className="aspect-square relative overflow-hidden bg-cream/50">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 <div className="absolute top-4 left-4">
                   <span className="bg-gradient-nature text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
                     Destaque
                   </span>
+                  </div>
                 </div>
-              </div>
+              </Link>
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-nature transition-colors">
-                  {product.name}
-                </h3>
-                <p className="text-muted-foreground mb-4 line-clamp-2">
-                  {product.description}
-                </p>
+                <Link to={`/produto/${product.id}`}>
+                  <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-nature transition-colors">
+                    {product.name}
+                  </h3>
+                  <p className="text-muted-foreground mb-4 line-clamp-2">
+                    {product.description}
+                  </p>
+                </Link>
                 <div className="flex items-center justify-between">
                   <span className="text-2xl font-bold text-nature">
                     {formatPrice(product.price)}

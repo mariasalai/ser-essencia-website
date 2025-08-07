@@ -7,6 +7,9 @@ import sprayMelissa from '@/assets/spray-melissa.jpg';
 import rollOnDorCabeca from '@/assets/roll-on-dor-cabeca.jpg';
 import kitBemEstar from '@/assets/kit-bem-estar.jpg';
 import sprayProtecao from '@/assets/spray-protecao.jpg';
+import esp501 from '@/assets/esp501.jpg';
+import esp502 from '@/assets/esp502.jpg';
+import esp503 from '@/assets/esp503.jpg';
 
 export interface Product {
   id: string;
@@ -47,8 +50,8 @@ export const products: Product[] = [
     name: 'Escalda-Pés Relaxar 50g',
     description: 'Uma pausa merecida para os seus pés e sua mente. Nosso Escalda-Pés Relaxar é feito com sal rosa do Himalaia, lavanda, camomila e hibiscos — ingredientes naturais que aliviam o cansaço físico e mental. Ao entrar em contato com a água morna, liberam um aroma suave e terapêutico que acalma, relaxa e ajuda a desacelerar depois de um dia corrido. Ideal para momentos de autocuidado e conexão com o presente. Uso único.',
     price: 9.90,
-    image: escaldaPesLavanda,
-    images: [escaldaPesLavanda, sprayMelissa, rollOnDorCabeca], // Múltiplas imagens para galeria
+    image: esp501,
+    images: [esp501, esp502, esp503], // Múltiplas imagens para galeria
     category: ['escalda-pes',],
     featured: false, // PRODUTO EM DESTAQUE
     ingredients: ['Óleo Essencial de Lavanda', 'Camomila', 'Hibiscos', 'Sal grosso rosa'],

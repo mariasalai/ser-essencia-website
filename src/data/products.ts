@@ -13,7 +13,8 @@ export interface Product {
   name: string;
   description: string;
   price: number;
-  image: string;
+  image: string; // Imagem principal (para compatibilidade)
+  images?: string[]; // Array de imagens para galeria
   category: ProductCategory [];
   featured: boolean; // Para controlar quais aparecem no carrossel
   ingredients?: string[];
@@ -47,6 +48,7 @@ export const products: Product[] = [
     description: 'Uma pausa merecida para os seus pés e sua mente. Nosso Escalda-Pés Relaxar é feito com sal rosa do Himalaia, lavanda, camomila e hibiscos — ingredientes naturais que aliviam o cansaço físico e mental. Ao entrar em contato com a água morna, liberam um aroma suave e terapêutico que acalma, relaxa e ajuda a desacelerar depois de um dia corrido. Ideal para momentos de autocuidado e conexão com o presente. Uso único.',
     price: 9.90,
     image: escaldaPesLavanda,
+    images: [escaldaPesLavanda, sprayMelissa, rollOnDorCabeca], // Múltiplas imagens para galeria
     category: ['escalda-pes',],
     featured: false, // PRODUTO EM DESTAQUE
     ingredients: ['Óleo Essencial de Lavanda', 'Camomila', 'Hibiscos', 'Sal grosso rosa'],

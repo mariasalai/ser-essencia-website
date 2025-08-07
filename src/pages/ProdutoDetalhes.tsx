@@ -7,6 +7,7 @@ import { getProductById, categoryNames } from "@/data/products";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Cart } from "@/components/Cart";
+import { ProductImageGallery } from "@/components/ProductImageGallery";
 import { useCart } from "@/contexts/CartContext";
 import { ArrowLeft, ShoppingCart, Heart, Share2, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -100,15 +101,12 @@ const ProdutoDetalhes = () => {
 
         {/* Product Details */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {/* Product Image */}
+          {/* Product Image Gallery */}
           <div className="space-y-4">
-            <div className="aspect-square rounded-2xl overflow-hidden bg-cream/30 border-2 border-border">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
+            <ProductImageGallery 
+              images={product.images || [product.image]} 
+              productName={product.name}
+            />
           </div>
 
           {/* Product Info */}

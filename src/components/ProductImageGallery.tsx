@@ -39,6 +39,8 @@ export const ProductImageGallery = ({ images, productName }: ProductImageGallery
           src={images[selectedImageIndex]}
           alt={`${productName} - Imagem ${selectedImageIndex + 1}`}
           className="w-full h-full object-cover transition-all duration-300"
+          loading="eager"
+          decoding="async"
         />
         
         {/* Navegação da imagem principal */}
@@ -97,6 +99,8 @@ export const ProductImageGallery = ({ images, productName }: ProductImageGallery
                 src={image}
                 alt={`${productName} - Miniatura ${index + 1}`}
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </button>
           ))}

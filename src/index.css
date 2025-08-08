@@ -6,6 +6,18 @@
 All colors MUST be HSL.
 */
 
+/* Image optimization for better quality rendering */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.product-image {
+  image-rendering: high-quality;
+  image-rendering: -webkit-optimize-contrast;
+}
+
 @layer base {
   :root {
     /* Ser Essência Natural Theme */

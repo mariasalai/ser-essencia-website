@@ -27,20 +27,22 @@ export interface Product {
   inStock: boolean;
 }
 
-export type ProductCategory = 'escalda-pes' | 'spray-terapeutico' | 'roll-on' | 'kits';
+export type ProductCategory = 'escalda-pes' | 'spray-terapeutico' | 'roll-on' | 'kits' | 'brinde';
 
 export const categoryNames: Record<ProductCategory, string> = {
   'escalda-pes': 'Escalda-Pés',
   'spray-terapeutico': 'Spray Terapêutico', 
   'roll-on': 'Roll-on Terapêutico',
   'kits': 'Kits',
+  'brinde': 'Brinde',
 };
 
 export const categoryDescriptions: Record<ProductCategory, string> = {
   'escalda-pes': 'O poder de realizar um ritual milenar na sua rotina',
   'spray-terapeutico': 'Óleos essenciais em forma de spray para seu bem-estar diário',
   'roll-on': 'Alívio natural e prático para levar onde quiser',
-  'kits' : 'Aqui você encontra os nossos queridinhos em conjuntos especiais'
+  'kits' : 'Aqui você encontra os nossos queridinhos em conjuntos especiais',
+  'brinde': 'Produtos especiais oferecidos gratuitamente'
 };
 
 // Base de dados dos produtos - EDITE AQUI PARA GERENCIAR TODOS OS PRODUTOS

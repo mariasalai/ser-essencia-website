@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ShoppingCart, Plus, Minus, Trash2, MessageCircle } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { ShoppingCart, Plus, Minus, Trash2, MessageCircle, Ticket, X } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
+import { useToast } from '@/hooks/use-toast';
 
 export const CartTrigger: React.FC = () => {
   const { getTotalItems, setIsOpen } = useCart();
@@ -27,7 +29,51 @@ export const CartTrigger: React.FC = () => {
 };
 
 export const Cart: React.FC = () => {
-  const { items, updateQuantity, removeFromCart, getTotalPrice, clearCart, isOpen, setIsOpen } = useCart();
+  const { 
+    items, 
+    updateQuantity, 
+    removeFromCart, 
+    getTotalPrice, 
+    getFinalPrice,
+    getDiscountAmount,
+    appliedCoupon,
+    applyCoupon,
+    removeCoupon,
+    clearCart, 
+    isOpen, 
+    setIsOpen 
+  } = useCart();
+  const { toast } = useToast();
+  const [couponCode, setCouponCode] = useState('');
+  const [showCouponInput, setShowCouponInput] = useState(false);
+
+  const handleApplyCoupon = () => {
+    if (!couponCode.trim()) return;
+    
+    const result = applyCoupon(couponCode);
+    if (result.success) {
+      toast({
+        title: "Cupom aplicado!",
+        description: result.message,
+      });
+      setCouponCode('');
+      setShowCouponInput(false);
+    } else {
+      toast({
+        title: "Erro",
+        description: result.message,
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleRemoveCoupon = () => {
+    removeCoupon();
+    toast({
+      title: "Cupom removido",
+      description: "O cupom foi removido do seu carrinho",
+    });
+  };
 
   const sendToWhatsApp = () => {
     if (items.length === 0) return;
@@ -37,11 +83,30 @@ export const Cart: React.FC = () => {
     items.forEach((item, index) => {
       message += `${index + 1}. *${item.product.name}*\n`;
       message += `   Quantidade: ${item.quantity}\n`;
-      message += `   Preço unitário: R$ ${item.product.price.toFixed(2)}\n`;
-      message += `   Subtotal: R$ ${(item.product.price * item.quantity).toFixed(2)}\n\n`;
+      if (item.product.price > 0) {
+        message += `   Preço unitário: R$ ${item.product.price.toFixed(2)}\n`;
+        message += `   Subtotal: R$ ${(item.product.price * item.quantity).toFixed(2)}\n\n`;
+      } else {
+        message += `   🎁 *BRINDE*\n\n`;
+      }
     });
 
-    message += `💰 *Total: R$ ${getTotalPrice().toFixed(2)}*\n\n`;
+    const subtotal = getTotalPrice();
+    message += `💵 *Subtotal: R$ ${subtotal.toFixed(2)}*\n`;
+    
+    if (appliedCoupon) {
+      if (appliedCoupon.type === 'discount') {
+        const discount = getDiscountAmount();
+        message += `🎟️ *Cupom ${appliedCoupon.code}: -R$ ${discount.toFixed(2)} (${appliedCoupon.discount}%)*\n`;
+        message += `💰 *Total: R$ ${getFinalPrice().toFixed(2)}*\n\n`;
+      } else {
+        message += `🎁 *Cupom ${appliedCoupon.code}: Brinde incluído*\n`;
+        message += `💰 *Total: R$ ${getFinalPrice().toFixed(2)}*\n\n`;
+      }
+    } else {
+      message += `💰 *Total: R$ ${getFinalPrice().toFixed(2)}*\n\n`;
+    }
+    
     message += "Gostaria de finalizar este pedido! 😊";
 
     const whatsappUrl = `https://wa.me/5547999382587?text=${encodeURIComponent(message)}`;
@@ -120,13 +185,85 @@ export const Cart: React.FC = () => {
                 ))}
               </div>
 
-              <div className="border-t pt-4 space-y-2">
-                <div className="flex justify-between items-center font-semibold text-lg">
-                  <span>Total:</span>
-                  <span>{formatPrice(getTotalPrice())}</span>
+              <div className="border-t pt-4 space-y-4">
+                {/* Seção do Cupom */}
+                <div className="space-y-2">
+                  {!appliedCoupon ? (
+                    <>
+                      {!showCouponInput ? (
+                        <Button
+                          variant="outline"
+                          onClick={() => setShowCouponInput(true)}
+                          className="w-full"
+                        >
+                          <Ticket className="h-4 w-4 mr-2" />
+                          Aplicar cupom
+                        </Button>
+                      ) : (
+                        <div className="flex gap-2">
+                          <Input
+                            placeholder="Digite o código do cupom"
+                            value={couponCode}
+                            onChange={(e) => setCouponCode(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && handleApplyCoupon()}
+                            className="flex-1"
+                          />
+                          <Button onClick={handleApplyCoupon} size="sm">
+                            Aplicar
+                          </Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => {
+                              setShowCouponInput(false);
+                              setCouponCode('');
+                            }}
+                          >
+                            <X className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <div className="flex items-center justify-between bg-green-50 p-3 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <Ticket className="h-4 w-4 text-green-600" />
+                        <span className="text-sm font-medium text-green-800">
+                          {appliedCoupon.code} aplicado
+                        </span>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={handleRemoveCoupon}
+                        className="text-green-600 hover:text-green-800"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  )}
                 </div>
-                  {/* Novo texto: Frete a combinar */}
-                <div className="text-sm text-gray-600 text-right -mt-2">Frete a combinar</div>
+
+                {/* Cálculos do Carrinho */}
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span>Subtotal:</span>
+                    <span>{formatPrice(getTotalPrice())}</span>
+                  </div>
+                  
+                  {appliedCoupon && appliedCoupon.type === 'discount' && (
+                    <div className="flex justify-between items-center text-green-600">
+                      <span>Desconto ({appliedCoupon.discount}%):</span>
+                      <span>-{formatPrice(getDiscountAmount())}</span>
+                    </div>
+                  )}
+                  
+                  <div className="flex justify-between items-center font-semibold text-lg border-t pt-2">
+                    <span>Total:</span>
+                    <span>{formatPrice(getFinalPrice())}</span>
+                  </div>
+                  <div className="text-sm text-gray-600 text-right -mt-2">Frete a combinar</div>
+                </div>
 
                 <div className="space-y-2">
                   <Button

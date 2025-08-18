@@ -9,6 +9,7 @@ const categoryIcons: Record<ProductCategory, any> = {
   'spray-terapeutico': Sparkles,
   'roll-on': Circle,
   'kits' : Gift,
+  'brinde': Gift,
 };
 
 const CategoriesSection = () => {

@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Edit, Trash2, Percent, Gift } from 'lucide-react';
+import { CouponForm } from './CouponForm';
 
 interface Coupon {
   id: string;
@@ -23,6 +24,8 @@ interface Coupon {
 export const CouponsManager = () => {
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [editingCoupon, setEditingCoupon] = useState<Coupon | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -96,6 +99,20 @@ export const CouponsManager = () => {
     }
   };
 
+  const handleEdit = (coupon: Coupon) => {
+    setEditingCoupon(coupon);
+    setIsFormOpen(true);
+  };
+
+  const handleFormClose = () => {
+    setIsFormOpen(false);
+    setEditingCoupon(null);
+  };
+
+  const handleFormSuccess = () => {
+    fetchCoupons();
+  };
+
   if (loading) {
     return (
       <Card>
@@ -122,7 +139,7 @@ export const CouponsManager = () => {
             {coupons.length} cupons cadastrados
           </p>
         </div>
-        <Button>
+        <Button onClick={() => setIsFormOpen(true)}>
           <Plus className="h-4 w-4 mr-2" />
           Novo Cupom
         </Button>
@@ -190,7 +207,7 @@ export const CouponsManager = () => {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Button variant="ghost" size="sm">
+                      <Button variant="ghost" size="sm" onClick={() => handleEdit(coupon)}>
                         <Edit className="h-4 w-4" />
                       </Button>
                       <Button 
@@ -215,6 +232,13 @@ export const CouponsManager = () => {
           </Table>
         </CardContent>
       </Card>
+
+      <CouponForm
+        isOpen={isFormOpen}
+        onClose={handleFormClose}
+        onSuccess={handleFormSuccess}
+        coupon={editingCoupon}
+      />
     </div>
   );
 };

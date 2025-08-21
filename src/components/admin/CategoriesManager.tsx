@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Edit, Trash2 } from 'lucide-react';
+import { CategoryForm } from './CategoryForm';
 
 interface Category {
   id: string;
@@ -19,6 +20,8 @@ interface Category {
 export const CategoriesManager = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -101,6 +104,20 @@ export const CategoriesManager = () => {
     }
   };
 
+  const handleEdit = (category: Category) => {
+    setEditingCategory(category);
+    setIsFormOpen(true);
+  };
+
+  const handleFormClose = () => {
+    setIsFormOpen(false);
+    setEditingCategory(null);
+  };
+
+  const handleFormSuccess = () => {
+    fetchCategories();
+  };
+
   if (loading) {
     return (
       <Card>
@@ -127,7 +144,7 @@ export const CategoriesManager = () => {
             {categories.length} categorias cadastradas
           </p>
         </div>
-        <Button>
+        <Button onClick={() => setIsFormOpen(true)}>
           <Plus className="h-4 w-4 mr-2" />
           Nova Categoria
         </Button>
@@ -174,7 +191,7 @@ export const CategoriesManager = () => {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Button variant="ghost" size="sm">
+                      <Button variant="ghost" size="sm" onClick={() => handleEdit(category)}>
                         <Edit className="h-4 w-4" />
                       </Button>
                       <Button 
@@ -200,6 +217,13 @@ export const CategoriesManager = () => {
           </Table>
         </CardContent>
       </Card>
+
+      <CategoryForm
+        isOpen={isFormOpen}
+        onClose={handleFormClose}
+        onSuccess={handleFormSuccess}
+        category={editingCategory}
+      />
     </div>
   );
 };

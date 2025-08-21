@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Edit, Trash2, Eye } from 'lucide-react';
+import { ProductForm } from './ProductForm';
 
 interface Product {
   id: string;
@@ -23,6 +24,8 @@ interface Product {
 export const ProductsManager = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -99,6 +102,20 @@ export const ProductsManager = () => {
     }
   };
 
+  const handleEdit = (product: Product) => {
+    setEditingProduct(product);
+    setIsFormOpen(true);
+  };
+
+  const handleFormClose = () => {
+    setIsFormOpen(false);
+    setEditingProduct(null);
+  };
+
+  const handleFormSuccess = () => {
+    fetchProducts();
+  };
+
   if (loading) {
     return (
       <Card>
@@ -125,7 +142,7 @@ export const ProductsManager = () => {
             {products.length} produtos cadastrados
           </p>
         </div>
-        <Button>
+        <Button onClick={() => setIsFormOpen(true)}>
           <Plus className="h-4 w-4 mr-2" />
           Novo Produto
         </Button>
@@ -181,7 +198,7 @@ export const ProductsManager = () => {
                       <Button variant="ghost" size="sm">
                         <Eye className="h-4 w-4" />
                       </Button>
-                      <Button variant="ghost" size="sm">
+                      <Button variant="ghost" size="sm" onClick={() => handleEdit(product)}>
                         <Edit className="h-4 w-4" />
                       </Button>
                       <Button 
@@ -206,6 +223,13 @@ export const ProductsManager = () => {
           </Table>
         </CardContent>
       </Card>
+
+      <ProductForm
+        isOpen={isFormOpen}
+        onClose={handleFormClose}
+        onSuccess={handleFormSuccess}
+        product={editingProduct}
+      />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -12,14 +12,22 @@ const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loginForm, setLoginForm] = useState({ email: '', password: '' });
   const [signupForm, setSignupForm] = useState({ email: '', password: '', displayName: '' });
-  const { signIn, signUp, user } = useAuth();
+  const { signIn, signUp, user, isAdmin, adminCheckComplete } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirectTo = searchParams.get('redirect');
 
   useEffect(() => {
-    if (user) {
-      navigate('/');
+    if (user && adminCheckComplete) {
+      if (redirectTo) {
+        navigate(redirectTo);
+      } else if (isAdmin) {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
     }
-  }, [user, navigate]);
+  }, [user, isAdmin, adminCheckComplete, redirectTo, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,9 +35,7 @@ const Auth = () => {
     
     const { error } = await signIn(loginForm.email, loginForm.password);
     
-    if (!error) {
-      navigate('/');
-    }
+    // Navigation will be handled by useEffect after admin check
     
     setIsLoading(false);
   };

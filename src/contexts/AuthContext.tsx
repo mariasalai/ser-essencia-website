@@ -11,6 +11,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, displayName: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
   isAdmin: boolean;
+  adminCheckComplete: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -28,6 +29,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [adminCheckComplete, setAdminCheckComplete] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -48,13 +50,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 .single();
               
               setIsAdmin(profile?.role === 'admin');
+              setAdminCheckComplete(true);
             } catch (error) {
               console.error('Error checking admin status:', error);
               setIsAdmin(false);
+              setAdminCheckComplete(true);
             }
           }, 0);
         } else {
           setIsAdmin(false);
+          setAdminCheckComplete(true);
         }
         
         setLoading(false);
@@ -164,7 +169,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     signIn,
     signUp,
     signOut,
-    isAdmin
+    isAdmin,
+    adminCheckComplete
   };
 
   return (
